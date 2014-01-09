@@ -14,4 +14,6 @@ Additionally, we think it would be a cool idea if some of our members could uplo
 
 For now, we are just in the recrutiing stage. After we amass enough people, we will meet during one lunch period(?) and decide on a project to work on, as well as begin to divy up the different tasks. After this, all work on the project will be done on one's own free time, and you will be able to contribute as much (or as little) as you wish. We really hope to have a fully functioning program by the end of this school year.
 
+If you would like to get involved, email me (palmerpa@heschel.org) or just talk to me in school.
+
 Stay tuned for further updates!
