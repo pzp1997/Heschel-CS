@@ -1,3 +1,5 @@
+#Palmer Paul, 2014
+
 flour = str(input("How much flour do you have? "))
 while str.isdigit(flour) == False:
     print("You must input an integer...")
