@@ -1,6 +1,6 @@
 #This is a test program to see how github.com works!
 
-#Written by Palmer Paul, 2014
+#Written by Palmer PaulxDxDleXDmkay, 2014
 
 def repeat_print(): #this is a function definition. when I write repeat_print() in the program, the indented code below will run
     x = str(input("Input whatever you want and press enter: ")) #asks user to input a string that will be printed
