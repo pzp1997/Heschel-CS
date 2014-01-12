@@ -1,7 +1,6 @@
-
 How to Install Python and GitHub
 
-
+Python and IDLE:
 1. Download the latest stable version of Python (3.3.x) from this link:
 http://www.python.org/ftp/python/3.3.3/python-3.3.3-macosx10.6.dmg
 
@@ -11,7 +10,7 @@ http://www.python.org/ftp/python/3.3.3/python-3.3.3-macosx10.6.dmg
 
 3. To begin writing programs, open up the application IDLE (it should be in your applications folder)
 
-
+Git and GitHub:
 1. Download the latest stable version of Git (1.8.4.2) from this link:
 https://git-osx-installer.googlecode.com/files/git-1.8.4.2-intel-universal-snow-leopard.dmg
 
