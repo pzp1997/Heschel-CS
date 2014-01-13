@@ -1,5 +1,5 @@
 Possible Projects (feel free to add on)
-=======================================
+
 
 Double Pendulum
 
@@ -9,7 +9,10 @@ http://www.youtube.com/watch?v=InBBFF0j040
 http://www.youtube.com/watch?v=nauLXHIkvf0
 http://www.youtube.com/watch?v=V4hvENrtMeE
 
-Car
+Car/Helicopter
+
 We can create a simple "racing" game. The car would be controlled by arrow keys, and checkpoints would be randomly generated.
+We can have the helicopter fly around in the 3D environment.
+Eventually, we *might* be able to hook up an accelerometor with an Arduino and use the input from the accelerometer as the controls (instead of the arrow keys).
 
 
