@@ -5,7 +5,7 @@ Welcome to our project!
 We are students at the Abraham Joshua Heschel School who are interested in programming. The purpose of this project is to allow us to collaborate in the creation of a Python project (exactly what that project is, has not yet been determined). The goals of the project are as follows:
 
   1. Create something in Python
-  2. Learn to collaboratively code/work in a programming team
+  2. Learn to collaboratively code/work in a programming team using Git/GitHub
   3. Learn new coding techniques from eachother by observing how someone solves a specific task
   4. Learn how to debug someone else's code and making your code debuggable by somebody else
   5. Have fun writing code and expanding our knowledge of Python
