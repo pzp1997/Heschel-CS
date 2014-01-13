@@ -9,4 +9,7 @@ http://www.youtube.com/watch?v=InBBFF0j040
 http://www.youtube.com/watch?v=nauLXHIkvf0
 http://www.youtube.com/watch?v=V4hvENrtMeE
 
+Car
+We can create a simple "racing" game. The car would be controlled by arrow keys, and checkpoints would be randomly generated.
+
 
