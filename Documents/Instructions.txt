@@ -1,48 +1,35 @@
-
+INSTRUCTIONS
 
 How to install Python and IDLE:
 1. Download the latest stable version of Python (3.3.x) from this link:
 http://www.python.org/ftp/python/3.3.3/python-3.3.3-macosx10.6.dmg
-
 2. Open the installer and follow the instructions to install Python and IDLE
 	NOTE: If you are getting the message that Python can't be installed because it is from an
 	unidentified developer, right-click on the Python.mpkg and select Open With > Installer
-
 3. To begin writing programs, open up the application IDLE (it should be in your applications folder)
-
 
 
 How to install Git and GitHub:
 1. Download the latest stable version of Git (1.8.4.2) from this link:
 https://git-osx-installer.googlecode.com/files/git-1.8.4.2-intel-universal-snow-leopard.dmg
-
 2. Open the installer and follow the instructions to install Git
 	NOTE: If you are getting the message that Git can't be installed because it is from an
 	unidentified developer, right-click on the git-1.8.4.2-intel-universal-snow-leopard.pkg and select Open With > Installer\
-	
 3. Follow the directions on this page to setup Git:
 https://help.github.com/articles/set-up-git#set-up-git
-
 4. Now go to this link to make a GitHub account:
 https://github.com/join
-
 5. Email me your username so that I can add you as a "Contributor", allowing you to make edits to the code
-
 6. Now you can go to this link and start exploring:
 https://github.com/pzp1997/Heschel-CS
-
 7. Download the GitHub for Mac application from this link:
 http://mac.github.com
-
 8. Click on this link to copy the GitHub repo to your computer (save it in the default location):
 github-mac://openRepo/https://github.com/pzp1997/Heschel-CS
-
 9. Open up Finder and from the menu bar go to Go > Go to Folder and type in ~/ in the box that comes up
-
 10. From here, find the folder Heschel-CS and do one of the following two options
 	Option 1: Drag the folder into your Sidebar
 	Option 2: Right-click on the folder and click on Make Alias. You can now move the folder Heschel-CS alias where ever you would like (I recommend the Desktop)
-
 
 
 Using Git and GitHub Effectively (MAKE SURE YOU DO THESE STEPS EVERYTIME YOU WORK ON THE PROJECT!):
