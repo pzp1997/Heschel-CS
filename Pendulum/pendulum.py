@@ -10,12 +10,12 @@
 from visual import * #imports all functions from the visual module
 
 ##visual window
-scene = display(title="Pendulum", background = color.white)
+scene = display(title="Single Pendulum", background = color.white)
 scene.select()
 
 ##user inputs
 theta = str(input("What should the starting position of the bob be (in degrees)? "))
-while str.isdigit(theta) == False:
+while theta.isdecimal() == False:
     print("You must input an integer.")
     theta = str(input("What should the starting position of the bob be? "))
 theta = int(theta)
@@ -24,7 +24,7 @@ theta = radians(theta)
 thetamax = theta
 
 strlen = str(input("What should the length of the string be? "))
-while str.isdigit(strlen) == False:
+while strlen.isdecimal() == False:
     print("You must input an integer.")
     strlen = str(input("What should the length of the string be? "))
 strlen = int(strlen)
@@ -32,13 +32,11 @@ strlen = int(strlen)
 ##establishes vector "location"
 x = strlen*cos(theta)
 y = strlen*sin(theta)
-location = vector(x-degtheta, y-degtheta, 0)
+location = vector(x, y, 0)
 
 ##objects
-pendulum = frame()
-bob = cylinder(frame = pendulum, pos=location, radius = 1.5, axis = (0, 0, 0.25), color = color.red)
-string = cylinder(frame = pendulum, pos=(0, 0, .125), radius = .05, axis = location, color = color.white)
-pendulum.axis = (90, 0, 0) 
+bob = cylinder(pos=location, radius = 1.5, axis = (0, 0, 0.25), color = color.red)
+string = cylinder(pos=(0, 0, .125), radius = .05, axis = location, color = color.white)
 
 ##animation loop
 while True:
@@ -48,13 +46,13 @@ while True:
         y = strlen*sin(theta)
         bob.pos = (x, y, 0)
         string.axis = (x, y, 0)
-        theta += .01
+        theta -= .01
     if theta>thetamax:
-        while x>=-thetamax:
+        while x>-thetamax:
             rate(100) #important line to dictate the fps. necessary when making an object move
             x = strlen*cos(theta)
             y = strlen*sin(theta)
             bob.pos = (x, y, 0)
             string.axis = (x, y, 0)
-            theta -= .01
+            theta += .01
 
