@@ -27,3 +27,21 @@ G = .0000000000667
 g = 
 x = 0
 y = anglemax*sin(((g/strlen)**1/2)*t)
+
+##animation loop
+while True:
+    while theta>=thetamax:
+        rate(100)
+        theta -= theta
+        x = strlen*cos(theta)
+        y = strlen*sin(theta)
+        bob.pos = (x, y, 0)
+        string.pos = (x, y, 0)
+    while theta<-thetamax:
+        rate(100)
+        theta += theta
+        x = strlen*cos(theta)
+        y = strlen*sin(theta)
+        bob.pos = (x, y, 0)
+        string.pos = (x, y, 0)
+
