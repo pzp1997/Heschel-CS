@@ -39,20 +39,18 @@ bob = cylinder(pos=location, radius = 1.5, axis = (0, 0, 0.25), color = color.re
 string = cylinder(pos=(0, 0, .125), radius = .05, axis = location, color = color.white)
 
 ##animation loop
+##animation loop
 while True:
-    rate(100) #important line to dictate the fps. necessary when making an object move
-    if theta<=thetamax:
-        x = strlen*cos(theta)
-        y = strlen*sin(theta)
-        bob.pos = (x, y, 0)
-        string.axis = (x, y, 0)
-        theta -= .01
-    if theta>thetamax:
-        while x>-thetamax:
-            rate(100) #important line to dictate the fps. necessary when making an object move
-            x = strlen*cos(theta)
-            y = strlen*sin(theta)
-            bob.pos = (x, y, 0)
-            string.axis = (x, y, 0)
-            theta += .01
+      y = strlen*sin(theta)
+      bob.pos = (x, y, 0)
+      string.axis = (x, y, 0)
+      theta += .01
+      if theta>thetamax:
+          while x>=-thetamax:
+              rate(100) #important line to dictate the fps. necessary when making an object move
+              x = strlen*cos(theta)
+              y = strlen*sin(theta)
+              bob.pos = (x, y, 0)
+              string.axis = (x, y, 0)
+              theta -= .01
 
