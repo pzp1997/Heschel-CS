@@ -51,23 +51,60 @@ def user_turn(player):
                 user_turn(player)
             else:
                 x+=1
-
-    if board[userchoice][row+1] == player and board[userchoice][row+2] == player and board[userchoice][row+3] == player:
-
-    if board[userchoice][row-1] == player and board[userchoice][row-2] == player and board[userchoice][row-3] == player:
-
-    if board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
-
-    if board[userchoice-1][row] == player and board[userchoice-2][row] == player and board[userchoice-3][row] == player:
-
-    if board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
-
-    if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
-
-    if board[userchoice-1][row+1] == player and board[userchoice-2][row+2] == player and board[userchoice-3][row+3] == player:
-
-    if board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
-        
+                
+    if row<=2:
+        if board[userchoice][row+1] == player and board[userchoice][row+2] == player and board[userchoice][row+3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+    if row>=3:
+        if board[userchoice][row-1] == player and board[userchoice][row-2] == player and board[userchoice][row-3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+    if userchoice<=3:
+        if board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+    if userchoice>=3:
+        if board[userchoice-1][row] == player and board[userchoice-2][row] == player and board[userchoice-3][row] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+    if userchoice<=3 and row<=3:
+        if board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+        if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+        if board[userchoice-1][row+1] == player and board[userchoice-2][row+2] == player and board[userchoice-3][row+3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
+        if board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
+            if player == "X":
+                print("PLAYER 1 WINS!")
+            if player == "O":
+                print("PLAYER 2 WINS!")
+            four_in_row = True
 
 def play_again():
     playagain = str(input("Would you like to play again? "))
@@ -95,6 +132,8 @@ def game():
         print()
         print("Player 1")
         user_turn("X")
+        if four_in_row == True:
+            break
         print()
         print_board()
         print()
