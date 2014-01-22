@@ -10,6 +10,7 @@ col5 = [" ", " ", " ", " ", " ", " "]
 col6 = [" ", " ", " ", " ", " ", " "]
 col7 = [" ", " ", " ", " ", " ", " "]
 board = [col1, col2, col3, col4, col5, col6, col7]
+four_in_row = False
 
 def print_board():
     print(" ___________________________ ")
@@ -51,82 +52,71 @@ def user_turn(player):
                 user_turn(player)
             else:
                 x+=1
+
+    def win():
+        print_board()
+        print()
+        if player == "X":
+            print("PLAYER 1 WINS!")
+        if player == "O":
+            print("PLAYER 2 WINS!")
+        global four_in_row
+        four_in_row = True
                 
     if row<=2:
         if board[userchoice][row+1] == player and board[userchoice][row+2] == player and board[userchoice][row+3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
     if row>=3:
         if board[userchoice][row-1] == player and board[userchoice][row-2] == player and board[userchoice][row-3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
     if userchoice<=3:
         if board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
     if userchoice>=3:
         if board[userchoice-1][row] == player and board[userchoice-2][row] == player and board[userchoice-3][row] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
-    if userchoice<=3 and row<=3:
+            win()
+    if userchoice<=3 and row<=2:
         if board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
+    if userchoice<=3 and row>=3:
         if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
+    if userchoice>=3 and row<=2:
         if board[userchoice-1][row+1] == player and board[userchoice-2][row+2] == player and board[userchoice-3][row+3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
+    if userchoice>=3 and row>=3:
         if board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
-            if player == "X":
-                print("PLAYER 1 WINS!")
-            if player == "O":
-                print("PLAYER 2 WINS!")
-            four_in_row = True
+            win()
 
 def play_again():
     playagain = str(input("Would you like to play again? "))
     if  playagain.lower() == "yes" or playagain.lower() == "y":
+        global col1
+        col1 = [" ", " ", " ", " ", " ", " "]
+        global col2
+        col2 = [" ", " ", " ", " ", " ", " "]
+        global col3
+        col3 = [" ", " ", " ", " ", " ", " "]
+        global col4
+        col4 = [" ", " ", " ", " ", " ", " "]
+        global col5
+        col5 = [" ", " ", " ", " ", " ", " "]
+        global col6
+        col6 = [" ", " ", " ", " ", " ", " "]
+        global col7
+        col7 = [" ", " ", " ", " ", " ", " "]
+        global board
+        board = [col1, col2, col3, col4, col5, col6, col7]
+        global four_in_row
+        four_in_row = False
         game()
     if playagain.lower() == "no" or playagain.lower() == "n":
         pass
     else:
         print("Sorry, I couldn't understand you. Please respond with \"yes\" or \"no\".")
-        play_again
+        play_again()
         
 def game():
-    col1 = [" ", " ", " ", " ", " ", " "]
-    col2 = [" ", " ", " ", " ", " ", " "]
-    col3 = [" ", " ", " ", " ", " ", " "]
-    col4 = [" ", " ", " ", " ", " ", " "]
-    col5 = [" ", " ", " ", " ", " ", " "]
-    col6 = [" ", " ", " ", " ", " ", " "]
-    col7 = [" ", " ", " ", " ", " ", " "]
-    board = [col1, col2, col3, col4, col5, col6, col7]
-    four_in_row = False
-    
     while four_in_row == False:
         print_board()
         print()
