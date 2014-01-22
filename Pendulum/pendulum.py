@@ -41,16 +41,17 @@ string = cylinder(pos=(0, 0, .125), radius = .05, axis = location, color = color
 ##animation loop
 ##animation loop
 while True:
-      y = strlen*sin(theta)
-      bob.pos = (x, y, 0)
-      string.axis = (x, y, 0)
-      theta += .01
-      if theta>thetamax:
-          while x>=-thetamax:
-              rate(100) #important line to dictate the fps. necessary when making an object move
-              x = strlen*cos(theta)
-              y = strlen*sin(theta)
-              bob.pos = (x, y, 0)
-              string.axis = (x, y, 0)
-              theta -= .01
+    x = strlen*cos(theta)
+    y = strlen*sin(theta)
+    bob.pos = (x, y, 0)
+    string.axis = (x, y, 0)
+    theta += .01
+    if theta>thetamax:
+        while x>=thetamax:
+            rate(100) #important line to dictate the fps. necessary when making an object move
+            x = strlen*cos(theta)
+            y = strlen*sin(theta)
+            bob.pos = (x, y, 0)
+            string.axis = (x, y, 0)
+            theta -= .01
 
