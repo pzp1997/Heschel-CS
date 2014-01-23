@@ -1,36 +1,69 @@
 #Connect Four by Palmer Paul, 2014
 
 print("Welcome to Connect Four")
+print()
 
-col1 = [" ", " ", " ", " ", " ", " "]
-col2 = [" ", " ", " ", " ", " ", " "]
-col3 = [" ", " ", " ", " ", " ", " "]
-col4 = [" ", " ", " ", " ", " ", " "]
-col5 = [" ", " ", " ", " ", " ", " "]
-col6 = [" ", " ", " ", " ", " ", " "]
-col7 = [" ", " ", " ", " ", " ", " "]
-board = [col1, col2, col3, col4, col5, col6, col7]
+board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
 four_in_row = False
+p1char = "X"
+p2char = "O"
 
+def settings():
+    config = str(input("Would you like to CONFIGURE the settings, or use the DEFAULT settings? "))
+    if config.lower() == "configure" or config.lower() == "c":
+        global p1char, p2char
+        print()
+        print("Player 1")
+        p1char = str(input("Choose one character to \"represent you\" on the board: "))
+        while len(p1char) != 1 or p1char == " ":
+            if len(p1char) != 1:
+                print("You must input a single character!")
+                p1char = str(input("Choose one character to \"represent you\" on the board: "))            
+            elif p1char == " ":
+                print("Your character cannot be a space!")
+                p1char = str(input("Choose one character to \"represent you\" on the board: "))
+            else:
+                pass
+        print()
+        print("Player 2")
+        p2char = str(input("Choose one character to \"represent you\" on the board: "))
+        while len(p2char) != 1 or p2char == " " or p2char == p1char:
+            if len(p2char) != 1:
+                print("You must input a single character!")
+                p2char = str(input("Choose one character to \"represent you\" on the board: "))            
+            elif p2char == " ":
+                print("Your character cannot be a space!")
+                p2char = str(input("Choose one character to \"represent you\" on the board: "))
+            elif p2char == p1char:
+                print("You can't choose the same character as Player 1!")
+                p2char = str(input("Choose one character to \"represent you\" on the board: "))
+            else:
+                pass
+    if config.lower() == "default" or config.lower() == "d":
+        pass
+    else:
+        print("Sorry, I didn't understand that. Please respond with \"configure\" or \"default\".")
+        settings()
+    
 def print_board():
     print(" ___________________________ ")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[5] + " | " + col2[5] + " | " + col3[5] + " | " + col4[5] + " | " + col5[5] + " | " + col6[5] + " | " + col7[5] + " |") 
+    print("| " + board[0][5] + " | " + board[1][5] + " | " + board[2][5] + " | " + board[3][5] + " | " + board[4][5] + " | " + board[5][5] + " | " + board[6][5] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[4] + " | " + col2[4] + " | " + col3[4] + " | " + col4[4] + " | " + col5[4] + " | " + col6[4] + " | " + col7[4] + " |")
+    print("| " + board[0][4] + " | " + board[1][4] + " | " + board[2][4] + " | " + board[3][4] + " | " + board[4][4] + " | " + board[5][4] + " | " + board[6][4] + " |")
     print("|___|___|___|___|___|___|___|")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[3] + " | " + col2[3] + " | " + col3[3] + " | " + col4[3] + " | " + col5[3] + " | " + col6[3] + " | " + col7[3] + " |") 
+    print("| " + board[0][3] + " | " + board[1][3] + " | " + board[2][3] + " | " + board[3][3] + " | " + board[4][3] + " | " + board[5][3] + " | " + board[6][3] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[2] + " | " + col2[2] + " | " + col3[2] + " | " + col4[2] + " | " + col5[2] + " | " + col6[2] + " | " + col7[2] + " |") 
+    print("| " + board[0][2] + " | " + board[1][2] + " | " + board[2][2] + " | " + board[3][2] + " | " + board[4][2] + " | " + board[5][2] + " | " + board[6][2] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[1] + " | " + col2[1] + " | " + col3[1] + " | " + col4[1] + " | " + col5[1] + " | " + col6[1] + " | " + col7[1] + " |") 
+    print("| " + board[0][1] + " | " + board[1][1] + " | " + board[2][1] + " | " + board[3][1] + " | " + board[4][1] + " | " + board[5][1] + " | " + board[6][1] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("|   |   |   |   |   |   |   |")
-    print("| " + col1[0] + " | " + col2[0] + " | " + col3[0] + " | " + col4[0] + " | " + col5[0] + " | " + col6[0] + " | " + col7[0] + " |") 
+    print("| " + board[0][0] + " | " + board[1][0] + " | " + board[2][0] + " | " + board[3][0] + " | " + board[4][0] + " | " + board[5][0] + " | " + board[6][0] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("  1   2   3   4   5   6   7  ")
     
@@ -56,9 +89,9 @@ def user_turn(player):
     def win():
         print_board()
         print()
-        if player == "X":
+        if player == p1char:
             print("PLAYER 1 WINS!")
-        if player == "O":
+        if player == p2char:
             print("PLAYER 2 WINS!")
         global four_in_row
         four_in_row = True
@@ -66,48 +99,57 @@ def user_turn(player):
     if row<=2:
         if board[userchoice][row+1] == player and board[userchoice][row+2] == player and board[userchoice][row+3] == player:
             win()
+    ##########
+        if board[userchoice][row-1] == player and board[userchoice][row+1] == player and board[userchoice][row+2] == player:
+            win()
+    ##########
+        if board[userchoice][row-2] == player and board[userchoice][row-1] == player and board[userchoice][row+1] == player:
+            win()
     if row>=3:
-        if board[userchoice][row-1] == player and board[userchoice][row-2] == player and board[userchoice][row-3] == player:
+        if board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
             win()
     if userchoice<=3:
         if board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
             win()
+    ##########
+        if board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
+            win()
+    ##########
+        if board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
+            win()
     if userchoice>=3:
-        if board[userchoice-1][row] == player and board[userchoice-2][row] == player and board[userchoice-3][row] == player:
+        if board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
             win()
     if userchoice<=3 and row<=2:
         if board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
             win()
-    if userchoice<=3 and row>=3:
-        if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+    ##########
+        if board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
             win()
-    if userchoice>=3 and row<=2:
-        if board[userchoice-1][row+1] == player and board[userchoice-2][row+2] == player and board[userchoice-3][row+3] == player:
+    ##########
+        if board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
             win()
     if userchoice>=3 and row>=3:
         if board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
             win()
-
+    if userchoice<=3 and row>=3:  
+        if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+            win()
+    ##########
+        if board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
+            win()
+    ##########
+        if board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
+            win()
+    if userchoice>=3 and row<=2:
+        if board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
+            win()
+            
 def play_again():
     playagain = str(input("Would you like to play again? "))
     if  playagain.lower() == "yes" or playagain.lower() == "y":
-        global col1
-        col1 = [" ", " ", " ", " ", " ", " "]
-        global col2
-        col2 = [" ", " ", " ", " ", " ", " "]
-        global col3
-        col3 = [" ", " ", " ", " ", " ", " "]
-        global col4
-        col4 = [" ", " ", " ", " ", " ", " "]
-        global col5
-        col5 = [" ", " ", " ", " ", " ", " "]
-        global col6
-        col6 = [" ", " ", " ", " ", " ", " "]
-        global col7
-        col7 = [" ", " ", " ", " ", " ", " "]
-        global board
-        board = [col1, col2, col3, col4, col5, col6, col7]
-        global four_in_row
+        global board, four_in_row
+        board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
         four_in_row = False
         game()
     if playagain.lower() == "no" or playagain.lower() == "n":
@@ -121,15 +163,16 @@ def game():
         print_board()
         print()
         print("Player 1")
-        user_turn("X")
+        user_turn(p1char)
         if four_in_row == True:
             break
         print()
         print_board()
         print()
         print("Player 2")
-        user_turn("O")
+        user_turn(p2char)
     play_again()
 
+settings()
 game()
 
