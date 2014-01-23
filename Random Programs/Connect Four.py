@@ -1,5 +1,11 @@
 #Connect Four by Palmer Paul, 2014
 
+##bugs
+#if you attempt to place a piece in a full row, the program will crash when you try to change the row
+#if you get four in a row in two directions it will count two wins
+    #tried changing the if's to elif's --> that broke most of the checking equations
+#used globals
+
 print("Welcome to Connect Four")
 print()
 
@@ -104,7 +110,7 @@ def user_turn(player):
             print(p1name + ": " + str(p1wins) + " wins")
             print(p2name + ": " + str(p2wins) + " wins")
             print("Ties: " + str(ties))
-        if player == p2char:
+        elif player == p2char:
             p2wins+=1
             print(p2name.upper() + " WINS!")
             print()
@@ -112,16 +118,7 @@ def user_turn(player):
             print(p2name + ": " + str(p2wins) + " wins")
             print("Ties: " + str(ties))
         four_in_row = True
-                
-    if row<=2:
-        if board[userchoice][row+1] == player and board[userchoice][row+2] == player and board[userchoice][row+3] == player:
-            win()
-    if row>=1 and row<=3:
-        if board[userchoice][row-1] == player and board[userchoice][row+1] == player and board[userchoice][row+2] == player:
-            win()
-    if row>=2 and row<=4:
-        if board[userchoice][row-2] == player and board[userchoice][row-1] == player and board[userchoice][row+1] == player:
-            win()
+         
     if row>=3:
         if board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
             win()
@@ -161,7 +158,7 @@ def user_turn(player):
     if userchoice>=3 and row<=2:
         if board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
             win()
-    if turns>=42:
+    elif turns>=42:
         ties+=1
         print_board()
         print()
@@ -181,9 +178,9 @@ def play_again():
         four_in_row = False
         turns = 0
         game()
-    if playagain.lower() == "no" or playagain.lower() == "n":
+    elif playagain.lower() == "no" or playagain.lower() == "n":
         pass
-    if playagain.lower() == "settings" or playagain.lower() == "s" or playagain.lower() == "configure" or playagain.lower() == "config" or playagain.lower() == "c":
+    elif playagain.lower() == "settings" or playagain.lower() == "s" or playagain.lower() == "configure" or playagain.lower() == "config" or playagain.lower() == "c":
         settings()
     else:
         print("Sorry, I couldn't understand you. Please respond with \"yes\" or \"no\".")
