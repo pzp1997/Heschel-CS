@@ -1,16 +1,13 @@
 #Connect Four by Palmer Paul, 2014
 
 ##bugs
-#if you attempt to place a piece in a full row, the program will crash when you try to change the row
-#if you get four in a row in two directions it will count two wins
-    #tried changing the if's to elif's --> that broke most of the checking equations
 #used globals
+#playagain>no: Uses quit(), which "gets the job done", but makes a message pop up
 
 print("Welcome to Connect Four")
 print()
 
 board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
-four_in_row = False
 p1char = "X"
 p2char = "O"
 p1name = "Player 1"
@@ -95,68 +92,53 @@ def user_turn(player):
         else:
             if x>=5:
                 print("You cannot go in this column.")
+                row = False
                 user_turn(player)
             else:
                 x+=1
 
     def win():
-        global four_in_row, p1wins, p2wins, ties
+        global p1wins, p2wins, ties
         print_board()
         print()
         if player == p1char:
             p1wins+=1
             print(p1name.upper() + " WINS!")
-            print()
-            print(p1name + ": " + str(p1wins) + " wins")
-            print(p2name + ": " + str(p2wins) + " wins")
-            print("Ties: " + str(ties))
         elif player == p2char:
             p2wins+=1
             print(p2name.upper() + " WINS!")
-            print()
-            print(p1name + ": " + str(p1wins) + " wins")
-            print(p2name + ": " + str(p2wins) + " wins")
-            print("Ties: " + str(ties))
-        four_in_row = True
+        print()
+        print(p1name + ": " + str(p1wins) + " wins")
+        print(p2name + ": " + str(p2wins) + " wins")
+        print("Ties: " + str(ties))
+        print()
+        play_again()
          
-    if row>=3:
-        if board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
+    if row>=3 and board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
             win()
-    if userchoice<=3:
-        if board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
+    if userchoice<=3 and board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
             win()
-    if userchoice>=1 and userchoice<=4:
-        if board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
+    if userchoice>=1 and userchoice<=4 and board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
             win()
-    if userchoice>=2 and userchoice<=5:
-        if board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
+    if userchoice>=2 and userchoice<=5 and board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
             win()
-    if userchoice>=3:
-        if board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
+    if userchoice>=3 and board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
             win()
-    if userchoice<=3 and row<=2:
-        if board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
+    if userchoice<=3 and row<=2 and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
             win()
-    if userchoice>=1 and row>=1 and userchoice<=4 and row<=3:
-        if board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
+    if userchoice>=1 and row>=1 and userchoice<=4 and row<=3 and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
             win()
-    if userchoice>=2 and row>=2 and userchoice<=5 and row<=4:
-        if board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
+    if userchoice>=2 and row>=2 and userchoice<=5 and row<=4 and board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
             win()
-    if userchoice>=3 and row>=3:
-        if board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
+    if userchoice>=3 and row>=3 and board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
             win()
-    if userchoice<=3 and row>=3:  
-        if board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+    if userchoice<=3 and row>=3 and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
             win()
-    if userchoice>=1 and row>=2 and userchoice<=4 and row<=4:
-        if board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
+    if userchoice>=1 and row>=2 and userchoice<=4 and row<=4 and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
             win()
-    if userchoice>=2 and row>=1 and userchoice<=5 and row<=3:
-        if board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
+    if userchoice>=2 and row>=1 and userchoice<=5 and row<=3 and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
             win()
-    if userchoice>=3 and row<=2:
-        if board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
+    if userchoice>=3 and row<=2 and board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
             win()
     elif turns>=42:
         ties+=1
@@ -173,34 +155,32 @@ def user_turn(player):
 def play_again():
     playagain = str(input("Would you like to play again? "))
     if  playagain.lower() == "yes" or playagain.lower() == "y":
-        global board, four_in_row, turns
+        global board, turns
         board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
-        four_in_row = False
         turns = 0
         game()
     elif playagain.lower() == "no" or playagain.lower() == "n":
-        pass
+        quit()
     elif playagain.lower() == "settings" or playagain.lower() == "s" or playagain.lower() == "configure" or playagain.lower() == "config" or playagain.lower() == "c":
+        board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
+        turns = 0
         settings()
     else:
         print("Sorry, I couldn't understand you. Please respond with \"yes\" or \"no\".")
         play_again()
         
 def game():
-    while four_in_row == False:
+    while True:
         print_board()
         print()
         print(p1name)
         user_turn(p1char)
-        if four_in_row == True:
-            break
         print()
         print_board()
         print()
         print(p2name)
         user_turn(p2char)
     print()
-    play_again()
 
 config = str(input("Would you like to CONFIGURE the settings, or use the DEFAULT settings? "))
 while config.lower() != "default" and config.lower() != "d" and config.lower() != "configure" and config.lower() != "c" and config.lower() != "config":
