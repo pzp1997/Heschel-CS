@@ -2,68 +2,134 @@
 
 ##bugs
 #used globals
-#playagain>no: Uses quit(), which "gets the job done", but makes a message pop up
-
-##features to add
-#switch between who goes first
-#add a basic computer (chooses a random column)
-#print the "winning four in a row"
-#put a limit on the length of the names (13 characters?)
+#playagain-->no doesn't cause game to stop (regression caused by removing the var four_in_row)
+    #necessary to remove that var to stop players from getting "multi-wins" on one game
 
 print("Welcome to Connect Four")
 print()
 
-board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
-p1char = "X"
-p2char = "O"
-p1name = "Player 1"
-p2name = "Player 2"
-p1wins = 0
-p2wins = 0
-ties = 0
-turns = 0
+class foo:
+    def __init__(self):
+        self.board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
+        self.p1char = "X"
+        self.p2char = "O"
+        self.p1name = "Player 1"
+        self.p2name = "Player 2"
+        self.p1wins = 0
+        self.p2wins = 0
+        self.ties = 0
+        self.turns = 0
 
-def settings():
-    global p1name, p1char, p2name, p2char
-    print()
-    print("Player 1")
-    p1name = str(input("What is your name? "))
-    while p1name == " " or p1name == "":
-        print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
-        p1name = str(input("What is your name? "))
-    p1char = str(input("Choose one character to \"represent you\" on the board: "))
-    while len(p1char) != 1 or p1char == " ":
-        if len(p1char) != 1:
-            print("You must input a single character!")
-            p1char = str(input("Choose one character to \"represent you\" on the board: "))
-        elif p1char == " ":
-            print("Your character cannot be a space!")
-            p1char = str(input("Choose one character to \"represent you\" on the board: "))
-        else:
-            break
-    print()
-    print("Player 2")
-    p2name = str(input("What is your name? "))
-    while p2name.lower() == p1name.lower() or p2name == " " or p2name == "":
-        if p2name.lower() == p1name.lower():
-            print("Please choose a different name than " + p1name)
-        else:
-            print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
-        p2name = str(input("What is your name? "))
-    p2char = str(input("Choose one character to \"represent you\" on the board: "))
-    while len(p2char) != 1 or p2char == " " or p2char == p1char:
-        if len(p2char) != 1:
-            print("You must input a single character!")
-            p2char = str(input("Choose one character to \"represent you\" on the board: "))            
-        elif p2char == " ":
-            print("Your character cannot be a space!")
-            p2char = str(input("Choose one character to \"represent you\" on the board: "))
-        elif p2char == p1char:
-            print("You can't choose the same character as " + p1name + "!")
-            p2char = str(input("Choose one character to \"represent you\" on the board: "))
-        else:
-            break
-    game()
+    def settings(self):
+        print()
+        print("Player 1")
+        self.p1name = str(input("What is your name? "))
+        self.p1char = str(input("Choose one character to \"represent you\" on the board: "))
+        while len(self.p1char) != 1 or self.p1char == " ":
+            if len(self.p1char) != 1:
+                print("You must input a single character!")
+                self.p1char = str(input("Choose one character to \"represent you\" on the board: "))
+            elif self.p1char == " ":
+                print("Your character cannot be a space!")
+                self.p1char = str(input("Choose one character to \"represent you\" on the board: "))
+            else:
+                break
+        print()
+        print("Player 2")
+        self.p2name = str(input("What is your name? "))
+        while self.p2name.lower() == self.p1name.lower():
+            print("Please choose a different name than " + self.p1name)
+            self.p2name = str(input("What is your name? "))
+        self.p2char = str(input("Choose one character to \"represent you\" on the board: "))
+        while len(self.p2char) != 1 or self.p2char == " " or self.p2char == self.p1char:
+            if len(self.p2char) != 1:
+                print("You must input a single character!")
+                self.p2char = str(input("Choose one character to \"represent you\" on the board: "))            
+            elif self.p2char == " ":
+                print("Your character cannot be a space!")
+                self.p2char = str(input("Choose one character to \"represent you\" on the board: "))
+            elif self.p2char == self.p1char:
+                print("You can't choose the same character as " + self.p1name + "!")
+                self.p2char = str(input("Choose one character to \"represent you\" on the board: "))
+            else:
+                break
+        game()
+
+        def user_turn(self, player):
+            userchoice = str(input("Choose a column (1-7): "))
+            while userchoice != "1" and userchoice != "2" and userchoice != "3" and userchoice != "4" and userchoice != "5" and userchoice != "6" and userchoice != "7":
+                print("You must input a whole number between 1 and 7...")
+                userchoice = str(input("Choose a column (1-7): "))
+            userchoice = int(userchoice)-1
+    
+            for x in range(0, 6):
+                if board[userchoice][x] == " ":
+                    row = x
+                    oard[userchoice][x] = player
+                    turns+=1
+                    break
+                else:
+                    if x>=5:
+                        print("You cannot go in this column.")
+                        row = False
+                        user_turn(player)
+                    else:
+                        x+=1
+
+            def win():
+                global p1wins, p2wins, ties
+                print_board()
+                print()
+                if player == self.p1char:
+                    self.p1wins+=1
+                    print(self.p1name.upper() + " WINS!")
+                elif player == self.p2char:
+                    self.p2wins+=1
+                    print(self.p2name.upper() + " WINS!")
+                print()
+                print(self.p1name + ": " + str(self.p1wins) + " wins")
+                print(self.p2name + ": " + str(self.p2wins) + " wins")
+                print("Ties: " + str(self.ties))
+                print()
+                play_again()
+         
+    if row>=3 and board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
+            win()
+    if userchoice<=3 and board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
+            win()
+    if userchoice>=1 and userchoice<=4 and board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
+            win()
+    if userchoice>=2 and userchoice<=5 and board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
+            win()
+    if userchoice>=3 and board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
+            win()
+    if userchoice<=3 and row<=2 and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
+            win()
+    if userchoice>=1 and row>=1 and userchoice<=4 and row<=3 and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
+            win()
+    if userchoice>=2 and row>=2 and userchoice<=5 and row<=4 and board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
+            win()
+    if userchoice>=3 and row>=3 and board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
+            win()
+    if userchoice<=3 and row>=3 and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+            win()
+    if userchoice>=1 and row>=2 and userchoice<=4 and row<=4 and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
+            win()
+    if userchoice>=2 and row>=1 and userchoice<=5 and row<=3 and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
+            win()
+    if userchoice>=3 and row<=2 and board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
+            win()
+    elif turns>=42:
+        ties+=1
+        print_board()
+        print()
+        print("TIE!")
+        print()
+        print(p1name + ": " + str(p1wins) + " wins")
+        print(p2name + ": " + str(p2wins) + " wins")
+        print("Ties: " + str(ties))
+        print()
+        play_again()
     
 def print_board():
     print(" ___________________________ ")
@@ -127,31 +193,31 @@ def user_turn(player):
         play_again()
          
     if row>=3 and board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
-        win()
+            win()
     if userchoice<=3 and board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
-        win()
+            win()
     if userchoice>=1 and userchoice<=4 and board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
-        win()
+            win()
     if userchoice>=2 and userchoice<=5 and board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
-        win()
+            win()
     if userchoice>=3 and board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
-        win()
+            win()
     if userchoice<=3 and row<=2 and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
-        win()
+            win()
     if userchoice>=1 and row>=1 and userchoice<=4 and row<=3 and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
-        win()
+            win()
     if userchoice>=2 and row>=2 and userchoice<=5 and row<=4 and board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
-        win()
+            win()
     if userchoice>=3 and row>=3 and board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
-        win()
+            win()
     if userchoice<=3 and row>=3 and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
-        win()
+            win()
     if userchoice>=1 and row>=2 and userchoice<=4 and row<=4 and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
-        win()
+            win()
     if userchoice>=2 and row>=1 and userchoice<=5 and row<=3 and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
-        win()
+            win()
     if userchoice>=3 and row<=2 and board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
-        win()
+            win()
     elif turns>=42:
         ties+=1
         print_board()
@@ -174,8 +240,6 @@ def play_again():
     elif playagain.lower() == "no" or playagain.lower() == "n":
         quit()
     elif playagain.lower() == "settings" or playagain.lower() == "s" or playagain.lower() == "configure" or playagain.lower() == "config" or playagain.lower() == "c":
-        board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
-        turns = 0
         settings()
     else:
         print("Sorry, I couldn't understand you. Please respond with \"yes\" or \"no\".")
