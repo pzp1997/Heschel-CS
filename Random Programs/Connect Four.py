@@ -7,7 +7,6 @@
 #when one player, the computer doesn't go first
 
 ##features to add
-#print the "winning four in a row"
 #put a limit on the length of the names (13 characters?)
 #when one player, player can choose if they want to go first or second in the first game
 
@@ -31,32 +30,30 @@ def settings():
     global p1name, p1char, p2name, p2char, numplayers
     print()
     numplayers = str(input("TWO players or ONE player: "))
-    while numplayers.lower() != "one" and numplayers.lower() != "1" and numplayers.lower() != "o" and numplayers.lower() != "two" and numplayers.lower() != "2" and numplayers.lower() != "t":
+    while numplayers.lower() != "one" and numplayers.lower() != "1" and numplayers.lower() != "o" and numplayers.lower() != "two" and numplayers.lower() != "2" and numplayers.lower() != "t" and numplayers.lower() != "one player" and numplayers.lower() != "two players":
         numplayers = str(input("Please input \"one\" or \"two\": "))
-    if numplayers.lower() == "one" or numplayers.lower() == "1" or numplayers.lower() == "o":
+    if numplayers.lower() == "one" or numplayers.lower() == "1" or numplayers.lower() == "o" or numplayers.lower() == "one player":
         numplayers = 1
-    elif numplayers.lower() == "two" or numplayers.lower() == "2" or numplayers.lower() == "t":
+    elif numplayers.lower() == "two" or numplayers.lower() == "2" or numplayers.lower() == "t" or or numplayers.lower() == "two players":
         numplayers = 2
-    
+    print()
     if numplayers == 2:
-        print()
         print("Player 1")
-    else: #
-        pass #
     p1name = str(input("What is your name? "))
     while p1name == " " or len(p1name) == 0:
         print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
         p1name = str(input("What is your name? "))
     p1char = str(input("Choose one character to \"represent you\" on the board: "))
-    while len(p1char) != 1 or p1char == " ":
+    while len(p1char) != 1 or p1char == " " or p1char == "-" or p1char == "|" or p1char == "/" or p1char == "\\":
         if len(p1char) != 1:
             print("You must input a single character!")
             p1char = str(input("Choose one character to \"represent you\" on the board: "))
         elif p1char == " ":
             print("Your character cannot be a space!")
             p1char = str(input("Choose one character to \"represent you\" on the board: "))
-        else: #
-            break #
+        elif p1char == "-" or p1char == "|" or p1char == "/" or p1char == "\\":
+            print("Sorry, that is not a valid character.")
+            p1char = str(input("Choose one character to \"represent you\" on the board: "))
     if numplayers == 2: 
         print()
         print("Player 2")
@@ -68,7 +65,7 @@ def settings():
                 print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
             p2name = str(input("What is your name? "))
         p2char = str(input("Choose one character to \"represent you\" on the board: "))
-        while len(p2char) != 1 or p2char == " " or p2char == p1char:
+        while len(p2char) != 1 or p2char == " " or p2char == p1char or p2char == "-" or p2char == "|" or p2char == "/" or p2char == "\\":
             if len(p2char) != 1:
                 print("You must input a single character!")
                 p2char = str(input("Choose one character to \"represent you\" on the board: "))            
@@ -78,8 +75,9 @@ def settings():
             elif p2char == p1char:
                 print("You can't choose the same character as " + p1name + "!")
                 p2char = str(input("Choose one character to \"represent you\" on the board: "))
-            else: #
-                break #
+            elif p2char == "-" or p2char == "|" or p2char == "/" or p2char == "\\":
+                print("Sorry, that is not a valid character.")
+                p2char = str(input("Choose one character to \"represent you\" on the board: "))
     if numplayers == 1:
         p2name = "Computer"
         p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
@@ -93,8 +91,6 @@ def settings():
             elif p2char == p1char:
                 print("You can't make the computer's character the same character as yours!")
                 p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
-            else: #
-                break #
     game(p1wins, p2wins, ties)
     
 def print_board():
@@ -162,30 +158,82 @@ def user_turn(player):
         play_again()
          
     if row>=3 and board[userchoice][row-3] == player and board[userchoice][row-2] == player and board[userchoice][row-1] == player:
+        board[userchoice][row-3] = "|"
+        board[userchoice][row-2] = "|"
+        board[userchoice][row-1] = "|"
+        board[userchoice][row] = "|"
         win()
     if userchoice<=3 and board[userchoice+1][row] == player and board[userchoice+2][row] == player and board[userchoice+3][row] == player:
+        board[userchoice][row] = "-"
+        board[userchoice+1][row] = "-"
+        board[userchoice+2][row] = "-"
+        board[userchoice+3][row] = "-"
         win()
     if userchoice>=1 and userchoice<=4 and board[userchoice-1][row] == player and board[userchoice+1][row] == player and board[userchoice+2][row] == player:
+        board[userchoice-1][row] = "-"
+        board[userchoice][row] = "-"
+        board[userchoice+1][row] = "-"
+        board[userchoice+2][row] = "-"
         win()
     if userchoice>=2 and userchoice<=5 and board[userchoice-2][row] == player and board[userchoice-1][row] == player and board[userchoice+1][row] == player:
+        board[userchoice-2][row] = "-"
+        board[userchoice-1][row] = "-"
+        board[userchoice][row] = "-"
+        board[userchoice+1][row] = "-"
         win()
     if userchoice>=3 and board[userchoice-3][row] == player and board[userchoice-2][row] == player and board[userchoice-1][row] == player:
+        board[userchoice-3][row] = "-"
+        board[userchoice-2][row] = "-"
+        board[userchoice-1][row] = "-"
+        board[userchoice][row] = "-"
         win()
     if userchoice<=3 and row<=2 and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player and board[userchoice+3][row+3] == player:
+        board[userchoice][row] = "/"
+        board[userchoice+1][row+1] = "/" 
+        board[userchoice+2][row+2] = "/"
+        board[userchoice+3][row+3] = "/"
         win()
     if userchoice>=1 and row>=1 and userchoice<=4 and row<=3 and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player and board[userchoice+2][row+2] == player:
+        board[userchoice-1][row-1] = "/"
+        board[userchoice][row] = "/"
+        board[userchoice+1][row+1] = "/"
+        board[userchoice+2][row+2] = "/"
         win()
     if userchoice>=2 and row>=2 and userchoice<=5 and row<=4 and board[userchoice-2][row-2] == player and board[userchoice-1][row-1] == player and board[userchoice+1][row+1] == player:
+        board[userchoice-2][row-2] = "/"
+        board[userchoice-1][row-1] = "/"
+        board[userchoice][row] = "/"
+        board[userchoice+1][row+1] = "/"
         win()
     if userchoice>=3 and row>=3 and board[userchoice-1][row-1] == player and board[userchoice-2][row-2] == player and board[userchoice-3][row-3] == player:
+        board[userchoice][row] = "/"
+        board[userchoice-1][row-1] = "/"
+        board[userchoice-2][row-2] = "/"
+        board[userchoice-3][row-3] = "/"
         win()
     if userchoice<=3 and row>=3 and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player and board[userchoice+3][row-3] == player:
+        board[userchoice][row] = "\\"
+        board[userchoice+1][row-1] = "\\"
+        board[userchoice+2][row-2] = "\\"
+        board[userchoice+3][row-3] = "\\"
         win()
     if userchoice>=1 and row>=2 and userchoice<=4 and row<=4 and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player and board[userchoice+2][row-2] == player:
+        board[userchoice-1][row+1] = "\\"
+        board[userchoice][row] = "\\"
+        board[userchoice+1][row-1] = "\\"
+        board[userchoice+2][row-2] = "\\"
         win()
     if userchoice>=2 and row>=1 and userchoice<=5 and row<=3 and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player and board[userchoice+1][row-1] == player:
+        board[userchoice-2][row+2] = "\\"
+        board[userchoice-1][row+1] = "\\"
+        board[userchoice][row] = "\\"
+        board[userchoice+1][row-1] = "\\"
         win()
     if userchoice>=3 and row<=2 and board[userchoice-3][row+3] == player and board[userchoice-2][row+2] == player and board[userchoice-1][row+1] == player:
+        board[userchoice-3][row+3] = "\\"
+        board[userchoice-2][row+2] = "\\"
+        board[userchoice-1][row+1] = "\\"
+        board[userchoice][row] = "\\"
         win()
     elif turns>=42:
         ties+=1
