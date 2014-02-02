@@ -4,10 +4,8 @@
 #used globals
 #playagain>no: Uses quit(), which "gets the job done", but makes a message pop up
 #p1name/p2name can be multiple spaces
-#when one player, the computer doesn't go first
 
 ##features to add
-#put a limit on the length of the names (13 characters?)
 #when one player, player can choose if they want to go first or second in the first game
 
 from random import randint
@@ -27,70 +25,77 @@ turns = 0
 numplayers = 2
 
 def settings():
-    global p1name, p1char, p2name, p2char, numplayers
+    global p1name, p1char, p2name, p2char, numplayers, p1wins, p2wins, ties
+    oldnumplayers = numplayers
     print()
     numplayers = str(input("TWO players or ONE player: "))
     while numplayers.lower() != "one" and numplayers.lower() != "1" and numplayers.lower() != "o" and numplayers.lower() != "two" and numplayers.lower() != "2" and numplayers.lower() != "t" and numplayers.lower() != "one player" and numplayers.lower() != "two players":
         numplayers = str(input("Please input \"one\" or \"two\": "))
     if numplayers.lower() == "one" or numplayers.lower() == "1" or numplayers.lower() == "o" or numplayers.lower() == "one player":
         numplayers = 1
-    elif numplayers.lower() == "two" or numplayers.lower() == "2" or numplayers.lower() == "t" or or numplayers.lower() == "two players":
+        if oldnumplayers == 2:
+            p1wins = 0
+            p2wins = 0
+            ties = 0
+    elif numplayers.lower() == "two" or numplayers.lower() == "2" or numplayers.lower() == "t" or numplayers.lower() == "two players":
         numplayers = 2
+        if oldnumplayers == 1:
+            p1wins = 0
+            p2wins = 0
+            ties = 0 
     print()
     if numplayers == 2:
         print("Player 1")
     p1name = str(input("What is your name? "))
-    while p1name == " " or len(p1name) == 0:
-        print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
+    while p1name == " " or len(p1name) == 0 or len(p1name) > 13:
+        if p1name == " " or len(p1name) == 0:
+            print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
+        elif len(p1name) > 13:
+            print("Your name must not be longer than 13 characters.")
         p1name = str(input("What is your name? "))
     p1char = str(input("Choose one character to \"represent you\" on the board: "))
     while len(p1char) != 1 or p1char == " " or p1char == "-" or p1char == "|" or p1char == "/" or p1char == "\\":
         if len(p1char) != 1:
             print("You must input a single character!")
-            p1char = str(input("Choose one character to \"represent you\" on the board: "))
         elif p1char == " ":
             print("Your character cannot be a space!")
-            p1char = str(input("Choose one character to \"represent you\" on the board: "))
         elif p1char == "-" or p1char == "|" or p1char == "/" or p1char == "\\":
             print("Sorry, that is not a valid character.")
-            p1char = str(input("Choose one character to \"represent you\" on the board: "))
+        p1char = str(input("Choose one character to \"represent you\" on the board: "))
     if numplayers == 2: 
         print()
         print("Player 2")
         p2name = str(input("What is your name? "))
-        while p2name.lower() == p1name.lower() or p2name == " " or len(p2name) == 0:
+        while p2name.lower() == p1name.lower() or p2name == " " or len(p2name) == 0 or len(p2name) > 13:
             if p2name.lower() == p1name.lower():
                 print("Please choose a different name than " + p1name)
-            else:
+            elif p2name == " " or len(p2name) == 0:
                 print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
+            elif len(p2name) > 13:
+                print("Your name must not be longer than 13 characters.")
             p2name = str(input("What is your name? "))
         p2char = str(input("Choose one character to \"represent you\" on the board: "))
         while len(p2char) != 1 or p2char == " " or p2char == p1char or p2char == "-" or p2char == "|" or p2char == "/" or p2char == "\\":
             if len(p2char) != 1:
-                print("You must input a single character!")
-                p2char = str(input("Choose one character to \"represent you\" on the board: "))            
+                print("You must input a single character!")            
             elif p2char == " ":
                 print("Your character cannot be a space!")
-                p2char = str(input("Choose one character to \"represent you\" on the board: "))
             elif p2char == p1char:
                 print("You can't choose the same character as " + p1name + "!")
-                p2char = str(input("Choose one character to \"represent you\" on the board: "))
             elif p2char == "-" or p2char == "|" or p2char == "/" or p2char == "\\":
                 print("Sorry, that is not a valid character.")
-                p2char = str(input("Choose one character to \"represent you\" on the board: "))
+            p2char = str(input("Choose one character to \"represent you\" on the board: "))
     if numplayers == 1:
         p2name = "Computer"
         p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
         while len(p2char) != 1 or p2char == " " or p2char == p1char:
             if len(p2char) != 1:
-                print("You must input a single character!")
-                p2char = str(input("Choose one character to \"represent the computer\" on the board: "))            
+                print("You must input a single character!")            
             elif p2char == " ":
                 print("The computer's character cannot be a space!")
-                p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
             elif p2char == p1char:
                 print("You can't make the computer's character the same character as yours!")
-                p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
+            p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
     game(p1wins, p2wins, ties)
     
 def print_board():
@@ -114,6 +119,7 @@ def print_board():
     print("| " + board[0][0] + " | " + board[1][0] + " | " + board[2][0] + " | " + board[3][0] + " | " + board[4][0] + " | " + board[5][0] + " | " + board[6][0] + " |") 
     print("|___|___|___|___|___|___|___|")
     print("  1   2   3   4   5   6   7  ")
+    print()
     
 def user_turn(player):
     global turns, ties, numplayers
@@ -143,7 +149,6 @@ def user_turn(player):
     def win():
         global p1wins, p2wins, ties
         print_board()
-        print()
         if player == p1char:
             p1wins+=1
             print(p1name.upper() + " WINS!")
@@ -238,7 +243,6 @@ def user_turn(player):
     elif turns>=42:
         ties+=1
         print_board()
-        print()
         print("TIE!")
         print()
         print(p1name + ": " + str(p1wins) + " wins")
@@ -267,24 +271,22 @@ def play_again():
 def game(p1wins, p2wins, ties):
     global numplayers
     while True:
-        print_board()
-        print()
-        if (p1wins+p2wins+ties)%2 != 0:
+        if (p1wins+p2wins+ties)%2 == 0:
+            print_board()
+            print(p1name)
+            user_turn(p1char)
             if numplayers == 2:
+                print_board()
                 print(p2name)
             user_turn(p2char)
-        else:
-            print(p1name)
-            user_turn(p1char)
-        if numplayers == 2:   
+        elif (p1wins+p2wins+ties)%2 != 0:
+            if numplayers == 2:
+                print_board()
+                print(p2name)
+            user_turn(p2char)    
             print_board()
-            print()
-        if (p1wins+p2wins+ties)%2 != 0:
             print(p1name)
             user_turn(p1char)
-        else:
-            print(p2name)
-            user_turn(p2char)
     print()
 
 config = str(input("Would you like to CONFIGURE the settings, or use the DEFAULT settings? "))
