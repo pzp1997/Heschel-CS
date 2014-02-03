@@ -3,10 +3,11 @@
 ##bugs
 #used globals
 #playagain>no: Uses quit(), which "gets the job done", but makes a message pop up
-#p1name/p2name can be multiple spaces
 
 ##features to add
 #when one player, player can choose if they want to go first or second in the first game
+    #turnchoice is in progress
+#switch choice/len with str.isspace()
 
 from random import randint
 
@@ -23,9 +24,10 @@ p2wins = 0
 ties = 0
 turns = 0
 numplayers = 2
+turnchoice = 1
 
 def settings():
-    global p1name, p1char, p2name, p2char, numplayers, p1wins, p2wins, ties
+    global p1name, p1char, p2name, p2char, numplayers, p1wins, p2wins, ties, turnchoice
     oldnumplayers = numplayers
     print()
     numplayers = str(input("TWO players or ONE player: "))
@@ -43,12 +45,12 @@ def settings():
             p1wins = 0
             p2wins = 0
             ties = 0 
-    print()
     if numplayers == 2:
+        print()
         print("Player 1")
     p1name = str(input("What is your name? "))
-    while p1name == " " or len(p1name) == 0 or len(p1name) > 13:
-        if p1name == " " or len(p1name) == 0:
+    while p1name.count(" ") == len(p1name) or len(p1name) == 0 or len(p1name) > 13:
+        if p1name.count(" ") == len(p1name) or len(p1name) == 0:
             print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
         elif len(p1name) > 13:
             print("Your name must not be longer than 13 characters.")
@@ -66,10 +68,10 @@ def settings():
         print()
         print("Player 2")
         p2name = str(input("What is your name? "))
-        while p2name.lower() == p1name.lower() or p2name == " " or len(p2name) == 0 or len(p2name) > 13:
+        while p2name.lower() == p1name.lower() or p2name.count(" ") == len(p2name) or len(p2name) == 0 or len(p2name) > 13:
             if p2name.lower() == p1name.lower():
                 print("Please choose a different name than " + p1name)
-            elif p2name == " " or len(p2name) == 0:
+            elif p2name.count(" ") == len(p2name) or len(p2name) == 0:
                 print("That is not a valid name. Your name must contain at least one character (spaces don't count as a character).")
             elif len(p2name) > 13:
                 print("Your name must not be longer than 13 characters.")
@@ -96,6 +98,14 @@ def settings():
             elif p2char == p1char:
                 print("You can't make the computer's character the same character as yours!")
             p2char = str(input("Choose one character to \"represent the computer\" on the board: "))
+        turnchoice = str(input("Would you like to go FIRST or SECOND? "))
+        while turnchoice.lower() != "1" and turnchoice.lower() != "first" and turnchoice.lower() != "1st" and turnchoice.lower() != "2" and turnchoice.lower() != "second" and turnchoice.lower() != "2nd":
+            print("Sorry, I couldn't understand you. Please respond with \"first\" or \"second\".")
+            turnchoice = str(input("Would you like to go FIRST or SECOND? "))
+        if turnchoice.lower() != "1" or turnchoice.lower() != "first" or turnchoice.lower() != "1st":
+            turnchoice = 1
+        elif turnchoice.lower() != "2" or turnchoice.lower() != "second" or turnchoice.lower() != "2nd":
+            turnchoice = 2
     game(p1wins, p2wins, ties)
     
 def print_board():
@@ -254,9 +264,13 @@ def user_turn(player):
 def play_again():
     playagain = str(input("Would you like to play again (to reconfigure settings, input \"settings\")? "))
     if  playagain.lower() == "yes" or playagain.lower() == "y":
-        global board, turns
+        global board, turns, turnchoice
         board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
         turns = 0
+        if turnchoice == 1:
+            turnchoice = 2
+        elif turnchoice == 2:
+            turnchoice = 1
         game(p1wins, p2wins, ties)
     elif playagain.lower() == "no" or playagain.lower() == "n":
         quit()
@@ -269,9 +283,9 @@ def play_again():
         play_again()
         
 def game(p1wins, p2wins, ties):
-    global numplayers
+    global numplayers, turnchoice
     while True:
-        if (p1wins+p2wins+ties)%2 == 0:
+        if ((p1wins+p2wins+ties)%2 == 0 and numplayers == 2) or (turnchoice == 1 and numplayers == 1):
             print_board()
             print(p1name)
             user_turn(p1char)
@@ -279,7 +293,7 @@ def game(p1wins, p2wins, ties):
                 print_board()
                 print(p2name)
             user_turn(p2char)
-        elif (p1wins+p2wins+ties)%2 != 0:
+        elif ((p1wins+p2wins+ties)%2 != 0 and numplayers == 2) or (turnchoice == 2 and numplayers == 1):
             if numplayers == 2:
                 print_board()
                 print(p2name)
@@ -287,7 +301,6 @@ def game(p1wins, p2wins, ties):
             print_board()
             print(p1name)
             user_turn(p1char)
-    print()
 
 config = str(input("Would you like to CONFIGURE the settings, or use the DEFAULT settings? "))
 while config.lower() != "default" and config.lower() != "d" and config.lower() != "configure" and config.lower() != "c" and config.lower() != "config":
