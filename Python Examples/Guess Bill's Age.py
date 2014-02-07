@@ -1,21 +1,24 @@
+#Guess Bill's Age by Palmer Paul, 2014
+
 from random import randint
 
 age = randint(0, 120)
+name = "Bill"
 
 def game():
-    guess = str(input("Guess how old Bill is: "))
+    guess = str(input("Guess how old " + name + " is: "))
     while guess.isdigit() == False:
         print("Your guess must be a counting number.")
-        guess = str(input("Guess how old Bill is: "))
+        guess = str(input("Guess how old " + name + " is: "))
     guess = int(guess)
     if guess>120:
-        print("Bill is younger than 120 years old.")
+        print(name + " is younger than 120 years old.")
         game()
     if guess>age:
-        print("Bill isn't that old!")
+        print(name + " isn't that old!")
         game()
     elif guess<age:
-        print("Bill is older than that!")
+        print(name + " is older than that!")
         game()
     elif guess == age:
         print("You win!")
