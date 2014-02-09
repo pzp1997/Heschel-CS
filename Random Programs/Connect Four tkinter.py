@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import tkinter as tk
+from random import randint
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -11,9 +12,20 @@ class Application(tk.Frame):
         self.board = [[" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " "]]
         self.userchoice = 0
         self.numturns = 0
-        self.turn = "X"
+        self.p1name = "Player 1"
+        self.p1char = "X"
+        self.p2name = "Player 2"
+        self.p2char = "O"
+        self.p1wins = 0
+        self.p2wins = 0
+        self.ties = 0
+        self.turn = self.p1char
 
     def createWidgets(self):
+        self.welcome_label = tk.Label(self)
+        self.welcome_label["text"] = "Welcome to Connect Four"
+        self.welcome_label.pack(side="top")
+        
         self.text = tk.Text(self)
         self.text.pack(side="top")
         
@@ -52,6 +64,26 @@ class Application(tk.Frame):
         self.row7_button["command"] = self.row7_event
         self.row7_button.pack(side="left")
 
+        self.settings_label = tk.Label(self)
+        self.settings_label["text"] = "Settings"
+        self.settings_label.pack(side="top")
+
+        self.p1name_entry = tk.Entry(self)
+        self.p1name_entry.pack(side="top")
+
+        self.p1name_button = tk.Button(self)
+        self.p1name_button["text"] = "Player 1 name"
+        self.p1name_button["command"] = self.p1name_retrieve_input
+        self.p1name_button.pack(side="top")
+
+        self.p2name_entry = tk.Entry(self)
+        self.p2name_entry.pack(side="top")
+
+        self.p2name_button = tk.Button(self)
+        self.p2name_button["text"] = "Player 2 name"
+        self.p2name_button["command"] = self.p2name_retrieve_input
+        self.p2name_button.pack(side="top")
+
         self.QUIT = tk.Button(self, text="QUIT", fg="red", command=root.destroy)
         self.QUIT.pack(side="bottom")
 
@@ -80,13 +112,11 @@ class Application(tk.Frame):
     def place_piece(self):
         for x in range(0, 6):
             if self.board[self.userchoice][x] == " ":
-                row = x
-                if self.turn == "X":
-                    self.board[self.userchoice][x] = "X"
-                    self.turn = "O"
-                elif self.turn == "O":
-                    self.board[self.userchoice][x] = "O"
-                    self.turn = "X"
+                self.row = x
+                if self.turn == self.p1char:
+                    self.board[self.userchoice][x] = self.p1char
+                elif self.turn == self.p2char:
+                    self.board[self.userchoice][x] = self.p2char
                 self.text.delete(1.0, tk.END)
                 self.print_board()
                 self.numturns+=1
@@ -97,33 +127,158 @@ class Application(tk.Frame):
                 else:
                     x+=1
 
+    def win(self):
+        self.text.delete(1.0, tk.END)
+        self.print_board()
+        if self.turn == self.p1char:
+            self.p1wins+=1
+            print(self.p1name.upper() + " WINS!")
+        elif self.turn == self.p2char:
+            self.p2wins+=1
+            print(self.p2name.upper() + " WINS!")
+        print()
+        print(self.p1name + ": " + str(self.p1wins) + " wins")
+        print(self.p2name + ": " + str(self.p2wins) + " wins")
+        print("Ties: " + str(self.ties))
+        print()
+        #play_again()
+
+    def win_check(self):
+        if self.row>=3 and self.board[self.userchoice][self.row-3] == self.turn and self.board[self.userchoice][self.row-2] == self.turn and self.board[self.userchoice][self.row-1] == self.turn:
+            self.board[self.userchoice][self.row-3] = "|"
+            self.board[self.userchoice][self.row-2] = "|"
+            self.board[self.userchoice][self.row-1] = "|"
+            self.board[self.userchoice][self.row] = "|"
+            self.win()
+        if self.userchoice<=3 and self.board[self.userchoice+1][self.row] == self.turn and self.board[self.userchoice+2][row] == self.turn and self.board[self.userchoice+3][self.row] == self.turn:
+            self.board[self.userchoice][self.row] = "-"
+            self.board[self.userchoice+1][self.row] = "-"
+            self.board[self.userchoice+2][self.row] = "-"
+            self.board[self.userchoice+3][self.row] = "-"
+            self.win()
+        if self.userchoice>=1 and self.userchoice<=4 and self.board[self.userchoice-1][self.row] == self.turn and self.board[self.userchoice+1][self.row] == self.turn and self.board[self.userchoice+2][self.row] == self.turn:
+            self.board[self.userchoice-1][self.row] = "-"
+            self.board[self.userchoice][self.row] = "-"
+            self.board[self.userchoice+1][self.row] = "-"
+            self.board[self.userchoice+2][self.row] = "-"
+            self.win()
+        if self.userchoice>=2 and self.userchoice<=5 and self.board[self.userchoice-2][self.row] == self.turn and self.board[self.userchoice-1][self.row] == self.turn and self.board[self.userchoice+1][self.row] == self.turn:
+            self.board[self.userchoice-2][self.row] = "-"
+            self.board[self.userchoice-1][self.row] = "-"
+            self.board[self.userchoice][self.row] = "-"
+            self.board[self.userchoice+1][self.row] = "-"
+            self.win()
+        if self.userchoice>=3 and self.board[self.userchoice-3][self.row] == self.turn and self.board[self.userchoice-2][self.row] == self.turn and self.board[self.userchoice-1][self.row] == self.turn:
+            self.board[self.userchoice-3][self.row] = "-"
+            self.board[self.userchoice-2][self.row] = "-"
+            self.board[self.userchoice-1][self.row] = "-"
+            self.board[self.userchoice][self.row] = "-"
+            self.win()
+        if self.userchoice<=3 and self.row<=2 and self.board[self.userchoice+1][self.row+1] == self.turn and self.board[self.userchoice+2][self.row+2] == self.turn and self.board[self.userchoice+3][self.row+3] == self.turn:
+            self.board[self.userchoice][self.row] = "/"
+            self.board[self.userchoice+1][self.row+1] = "/" 
+            self.board[self.userchoice+2][self.row+2] = "/"
+            self.board[self.userchoice+3][self.row+3] = "/"
+            self.win()
+        if self.userchoice>=1 and self.row>=1 and self.userchoice<=4 and self.row<=3 and self.board[self.userchoice-1][self.row-1] == self.turn and self.board[self.userchoice+1][self.row+1] == self.turn and self.board[self.userchoice+2][self.row+2] == self.turn:
+            self.board[self.userchoice-1][self.row-1] = "/"
+            self.board[self.userchoice][self.row] = "/"
+            self.board[self.userchoice+1][self.row+1] = "/"
+            self.board[self.userchoice+2][self.row+2] = "/"
+            self.win()
+        if self.userchoice>=2 and self.row>=2 and self.userchoice<=5 and self.row<=4 and self.board[self.userchoice-2][self.row-2] == self.turn and self.board[self.userchoice-1][self.row-1] == self.turn and self.board[self.userchoice+1][self.row+1] == self.turn:
+            self.board[self.userchoice-2][self.row-2] = "/"
+            self.board[self.userchoice-1][self.row-1] = "/"
+            self.board[self.userchoice][self.row] = "/"
+            self.board[self.userchoice+1][self.row+1] = "/"
+            self.win()
+        if self.userchoice>=3 and self.row>=3 and self.board[self.userchoice-1][self.row-1] == self.turn and self.board[self.userchoice-2][self.row-2] == self.turn and self.board[self.userchoice-3][self.row-3] == self.turn:
+            self.board[self.userchoice][self.row] = "/"
+            self.board[self.userchoice-1][self.row-1] = "/"
+            self.board[self.userchoice-2][self.row-2] = "/"
+            self.board[self.userchoice-3][self.row-3] = "/"
+            self.win()
+        if self.userchoice<=3 and self.row>=3 and self.board[self.userchoice+1][self.row-1] == self.turn and self.board[self.userchoice+2][self.row-2] == self.turn and self.board[self.userchoice+3][self.row-3] == self.turn:
+            self.board[self.userchoice][self.row] = "\\"
+            self.board[self.userchoice+1][self.row-1] = "\\"
+            self.board[self.userchoice+2][self.row-2] = "\\"
+            self.board[self.userchoice+3][self.row-3] = "\\"
+            self.win()
+        if self.userchoice>=1 and self.row>=2 and self.userchoice<=4 and self.row<=4 and self.board[self.userchoice-1][self.row+1] == self.turn and self.board[self.userchoice+1][self.row-1] == self.turn and self.board[self.userchoice+2][self.row-2] == self.turn:
+            self.board[self.userchoice-1][self.row+1] = "\\"
+            self.board[self.userchoice][self.row] = "\\"
+            self.board[self.userchoice+1][self.row-1] = "\\"
+            self.board[self.userchoice+2][self.row-2] = "\\"
+            self.win()
+        if self.userchoice>=2 and self.row>=1 and self.userchoice<=5 and self.row<=3 and self.board[self.userchoice-2][self.row+2] == self.turn and self.board[self.userchoice-1][self.row+1] == self.turn and self.board[self.userchoice+1][self.row-1] == self.turn:
+            self.board[self.userchoice-2][self.row+2] = "\\"
+            self.board[self.userchoice-1][self.row+1] = "\\"
+            self.board[self.userchoice][self.row] = "\\"
+            self.board[self.userchoice+1][self.row-1] = "\\"
+            self.win()
+        if self.userchoice>=3 and self.row<=2 and self.board[self.userchoice-3][self.row+3] == self.turn and self.board[self.userchoice-2][self.row+2] == self.turn and self.board[self.userchoice-1][self.row+1] == self.turn:
+            self.board[self.userchoice-3][self.row+3] = "\\"
+            self.board[self.userchoice-2][self.row+2] = "\\"
+            self.board[self.userchoice-1][self.row+1] = "\\"
+            self.board[self.userchoice][self.row] = "\\"
+            self.win()
+        elif self.numturns>=42:
+            self.ties+=1
+            self.text.delete(1.0, tk.END)
+            self.print_board()
+            print("TIE!")
+            print()
+            print(self.p1name + ": " + str(self.p1wins) + " wins")
+            print(self.p2name + ": " + str(self.p2wins) + " wins")
+            print("Ties: " + str(self.ties))
+            print()
+            #play_again()
+        else:
+            if self.turn == self.p1char:
+                self.turn = self.p2char
+            elif self.turn == self.p2char:
+                self.turn = self.p1char
+
     def row1_event(self):
         self.userchoice = 0
         self.place_piece()
+        self.win_check()
 
     def row2_event(self):
         self.userchoice = 1
         self.place_piece()
+        self.win_check()
 
     def row3_event(self):
         self.userchoice = 2
         self.place_piece()
+        self.win_check()
 
     def row4_event(self):
         self.userchoice = 3
         self.place_piece()
+        self.win_check()
         
     def row5_event(self):
         self.userchoice = 4
         self.place_piece()
+        self.win_check()
 
     def row6_event(self):
         self.userchoice = 5
         self.place_piece()
+        self.win_check()
 
     def row7_event(self):
         self.userchoice = 6
         self.place_piece()
+        self.win_check()
+
+    def p1name_retrieve_input(self):
+        self.p1name = self.p1name_entry.get()
+
+    def p2name_retrieve_input(self):
+        self.p2name = self.p2name_entry.get()
 
 root = tk.Tk()
 app = Application(master=root)

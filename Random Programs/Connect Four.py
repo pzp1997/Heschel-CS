@@ -7,7 +7,6 @@
 ##features to add
 #when one player, player can choose if they want to go first or second in the first game
     #turnchoice is in progress
-#switch choice/len with str.isspace()
 
 from random import randint
 
