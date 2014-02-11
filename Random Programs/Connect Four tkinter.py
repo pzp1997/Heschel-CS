@@ -1,3 +1,5 @@
+#Connect Four with Tkinter GUI by Palmer Paul, 2014
+
 #!/usr/bin/env python
 
 import tkinter as tk
@@ -28,6 +30,26 @@ class Application(tk.Frame):
         
         self.text = tk.Text(self)
         self.text.pack(side="top")
+        self.text.insert(tk.END, " ___________________________ \n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
+        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
+        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, "  1   2   3   4   5   6   7  \n")
         
         self.row1_button = tk.Button(self)
         self.row1_button["text"] = "1"
@@ -84,10 +106,22 @@ class Application(tk.Frame):
         self.p2name_button["command"] = self.p2name_retrieve_input
         self.p2name_button.pack(side="top")
 
-        self.QUIT = tk.Button(self, text="QUIT", fg="red", command=root.destroy)
+        self.p1wins_label = tk.Label(self)
+        self.p1wins_label.pack(side="right")
+
+        self.p2wins_label = tk.Label(self)
+        self.p2wins_label.pack(side="right")
+
+        self.ties_label = tk.Label(self)
+        self.ties_label.pack(side="right")
+
+        self.QUIT = tk.Button(self)
+        self.QUIT["text"] = "QUIT"
+        self.QUIT["command"] = root.destroy
         self.QUIT.pack(side="bottom")
 
     def print_board(self):
+        self.text.delete(1.0, tk.END)
         self.text.insert(tk.END, " ___________________________ \n")
         self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
         self.text.insert(tk.END, "| " + self.board[0][5] + " | " + self.board[1][5] + " | " + self.board[2][5] + " | " + self.board[3][5] + " | " + self.board[4][5] + " | " + self.board[5][5] + " | " + self.board[6][5] + " |\n") 
@@ -117,9 +151,8 @@ class Application(tk.Frame):
                     self.board[self.userchoice][x] = self.p1char
                 elif self.turn == self.p2char:
                     self.board[self.userchoice][x] = self.p2char
-                self.text.delete(1.0, tk.END)
-                self.print_board()
                 self.numturns+=1
+                self.win_check()
                 break
             else:
                 if x>=5:
@@ -128,7 +161,6 @@ class Application(tk.Frame):
                     x+=1
 
     def win(self):
-        self.text.delete(1.0, tk.END)
         self.print_board()
         if self.turn == self.p1char:
             self.p1wins+=1
@@ -136,11 +168,9 @@ class Application(tk.Frame):
         elif self.turn == self.p2char:
             self.p2wins+=1
             print(self.p2name.upper() + " WINS!")
-        print()
-        print(self.p1name + ": " + str(self.p1wins) + " wins")
-        print(self.p2name + ": " + str(self.p2wins) + " wins")
-        print("Ties: " + str(self.ties))
-        print()
+        self.p1wins_label["text"] = self.p1name + ": " + str(self.p1wins) + " wins"
+        self.p2wins_label["text"] = self.p2name + ": " + str(self.p2wins) + " wins"
+        self.ties_label["text"] = "Ties: " + str(self.ties)
         #play_again()
 
     def win_check(self):
@@ -150,7 +180,7 @@ class Application(tk.Frame):
             self.board[self.userchoice][self.row-1] = "|"
             self.board[self.userchoice][self.row] = "|"
             self.win()
-        if self.userchoice<=3 and self.board[self.userchoice+1][self.row] == self.turn and self.board[self.userchoice+2][row] == self.turn and self.board[self.userchoice+3][self.row] == self.turn:
+        if self.userchoice<=3 and self.board[self.userchoice+1][self.row] == self.turn and self.board[self.userchoice+2][self.row] == self.turn and self.board[self.userchoice+3][self.row] == self.turn:
             self.board[self.userchoice][self.row] = "-"
             self.board[self.userchoice+1][self.row] = "-"
             self.board[self.userchoice+2][self.row] = "-"
@@ -224,55 +254,63 @@ class Application(tk.Frame):
             self.win()
         elif self.numturns>=42:
             self.ties+=1
-            self.text.delete(1.0, tk.END)
             self.print_board()
             print("TIE!")
-            print()
-            print(self.p1name + ": " + str(self.p1wins) + " wins")
-            print(self.p2name + ": " + str(self.p2wins) + " wins")
-            print("Ties: " + str(self.ties))
-            print()
+            self.p1wins_label["text"] = self.p1name + ": " + str(self.p1wins) + " wins"
+            self.p2wins_label["text"] = self.p2name + ": " + str(self.p2wins) + " wins"
+            self.ties_label["text"] = "Ties: " + str(self.ties)
             #play_again()
         else:
+            self.print_board()
             if self.turn == self.p1char:
                 self.turn = self.p2char
             elif self.turn == self.p2char:
                 self.turn = self.p1char
 
+    def play_again(self):
+        pass
+
     def row1_event(self):
         self.userchoice = 0
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def row2_event(self):
         self.userchoice = 1
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def row3_event(self):
         self.userchoice = 2
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def row4_event(self):
         self.userchoice = 3
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
         
     def row5_event(self):
         self.userchoice = 4
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def row6_event(self):
         self.userchoice = 5
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def row7_event(self):
         self.userchoice = 6
         self.place_piece()
-        self.win_check()
+        if self.row != False:
+            self.win_check()
 
     def p1name_retrieve_input(self):
         self.p1name = self.p1name_entry.get()
