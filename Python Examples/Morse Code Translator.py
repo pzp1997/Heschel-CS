@@ -1,13 +1,8 @@
 def engtomc():
     s = str(input("Input a word to convert it into International Morse Code: "))
-    word = s
-    word.replace(" ", "")
-    print(word)
-    while s.isalnum() == False:
-        print("You may only input alphanumeric characters.")
-        s = str(input("Input a word to convert it into International Morse Code: "))
     word = s.lower()
     mc = ""
+    valid = True
 
     morsecode = {
         "a": "- ---",
@@ -49,10 +44,21 @@ def engtomc():
         " ": "       "
         }
 
-    for letter in range(len(word)):
-        mc = mc + morsecode[str(word[letter])] + "   "
+    if word == "!quit":
+        quit()
 
-    print(s + ": " + mc)
+    else:
+        for letter in range(len(word)):
+            try:
+                mc = mc + morsecode[str(word[letter])] + "   "
+            except KeyError:
+                print("Invalid input: You may only input alphanumeric characters and spaces.")
+                valid = False
+                break
 
+        if valid == True:
+            print(s + ": " + mc)
+
+print("Input !quit to exit the program.")
 while True:
     engtomc()

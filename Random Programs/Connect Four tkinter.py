@@ -30,13 +30,7 @@ class Application(tk.Frame):
         
         self.text = tk.Text(self)
         self.text.pack(side="top")
-        self.text.insert(tk.END, " ___________________________ \n")
-        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
-        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
-        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
-        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
-        self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
-        self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
+        self.text.insert(tk.END, " ___________________________ \n|   |   |   |   |   |   |   |\n|   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|\n|   |   |   |   |   |   |   |\n|   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|\n")
         self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n")
         self.text.insert(tk.END, "|   |   |   |   |   |   |   |\n") 
         self.text.insert(tk.END, "|___|___|___|___|___|___|___|\n")
@@ -164,10 +158,8 @@ class Application(tk.Frame):
         self.print_board()
         if self.turn == self.p1char:
             self.p1wins+=1
-            print(self.p1name.upper() + " WINS!")
         elif self.turn == self.p2char:
             self.p2wins+=1
-            print(self.p2name.upper() + " WINS!")
         self.p1wins_label["text"] = self.p1name + ": " + str(self.p1wins) + " wins"
         self.p2wins_label["text"] = self.p2name + ": " + str(self.p2wins) + " wins"
         self.ties_label["text"] = "Ties: " + str(self.ties)
@@ -255,7 +247,6 @@ class Application(tk.Frame):
         elif self.numturns>=42:
             self.ties+=1
             self.print_board()
-            print("TIE!")
             self.p1wins_label["text"] = self.p1name + ": " + str(self.p1wins) + " wins"
             self.p2wins_label["text"] = self.p2name + ": " + str(self.p2wins) + " wins"
             self.ties_label["text"] = "Ties: " + str(self.ties)

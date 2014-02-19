@@ -46,62 +46,64 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 def helper(filename):
-  my_file = open(filename, "r")
-  text = my_file.read()
-  my_file.close()
-  text = text.lower()
-  text = text.split()
-  word_count = {}
-  for word in range(0, len(text)):
-    try:
-      word_count[text[word]] += 1
-    except KeyError:
-      word_count[text[word]] == 1
-  return word_count
+    my_file = open(filename, "r")
+    text = my_file.read()
+    my_file.close()
+    text = text.lower()
+    text = text.split()
+    word_count = {}
+    for word in range(len(text)):
+        try:
+            word_count[text[word]] += 1
+        except KeyError:
+            if str(text[word][0]).isalnum():
+                word_count[text[word]] = 1
+    return word_count
 
-def print_words():
-  word_count = helper()
-  keys = word_count.keys()
-  keys.sort()
-  for key in range(len(keys)):
-    print(keys[key] + " " + str(word_count[keys[key]]))
+def print_words(filename):
+    word_count = helper(filename)
+    keys = word_count.keys()
+    keys = list(keys)
+    keys.sort()
+    for key in range(len(keys)):
+        print(keys[key] + " " + str(word_count[keys[key]]))
 
-def print_top():
-  word_count = helper()
-  keys = word_count.keys()
-  for x in range(0, 20):
-    highest = 0
-    highestkey = ""
-    for key in range(len(keys())):
-      if word_count[keys[key]]>highest:
-        highest = word_count[keys[key]]
-        highestkey = keys[key]
-    print(highestkey + " " + str(highest))
-    try:
-      del word_count[highestkey]
-    except KeyError:
-      pass
+def print_top(filename):
+    word_count = helper(filename)
+    keys = word_count.keys()
+    keys = list(keys)
+    keys.sort()
+    for x in range(20):
+        highestval = 0
+        highestkey = ""
+        for key in range(len(keys)):
+            if word_count[keys[key]]>highestval:
+                highestval = word_count[keys[key]]
+                highestkey = keys[key]
+        if highestval>0:
+            print(highestkey + " " + str(highestval))
+            keys.remove(highestkey)
+        else:
+            break
     
 ###
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
-  if len(sys.argv) != 3:
-    print ('usage: ./wordcount.py {--count | --topcount} file')
-    sys.exit(1)
+    if len(sys.argv) != 3:
+        print ('usage: ./wordcount.py {--count | --topcount} file')
+        sys.exit(1)
 
-  option = sys.argv[1]
-  filename = sys.argv[2]
-  if option == '--count':
-    helper(filename)
-    print_words()
-  elif option == '--topcount':
-    helper(filename)
-    print_top()
-  else:
-    print ('unknown option: ' + option)
-    sys.exit(1)
+    option = sys.argv[1]
+    filename = sys.argv[2]
+    if option == '--count':
+        print_words(filename)
+    elif option == '--topcount':
+        print_top(filename)
+    else:
+        print ('unknown option: ' + option)
+        sys.exit(1)
 
 if __name__ == '__main__':
-  main()
+    main()
