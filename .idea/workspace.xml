@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4dff119-55d5-40c5-bdb7-437e38a89824" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Random Programs/address_book.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Random Programs/Address Book.py" afterPath="$PROJECT_DIR$/Random Programs/Address Book.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Random Programs/JSON practice.py" afterPath="$PROJECT_DIR$/Random Programs/JSON practice.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Random Programs/data.txt" afterPath="$PROJECT_DIR$/Random Programs/data.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Heschel-CS.iws" />
@@ -31,7 +30,7 @@
       <file leaf-file-name="Address Book.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="49" selection-start="152" selection-end="152" vertical-scroll-proportion="0.18037136" vertical-offset="0" max-vertical-offset="3910">
+            <state line="152" column="32" selection-start="6184" selection-end="6217" vertical-scroll-proportion="0.42705572" vertical-offset="2423" max-vertical-offset="4641">
               <folding />
             </state>
           </provider>
@@ -56,8 +55,8 @@
         <option value="$PROJECT_DIR$/Random Programs/Practice_wth_Classes.py" />
         <option value="$PROJECT_DIR$/Random Programs/Address Book Scraps.py" />
         <option value="$PROJECT_DIR$/Random Programs/address_book.txt" />
-        <option value="$PROJECT_DIR$/Random Programs/data.txt" />
         <option value="$PROJECT_DIR$/Random Programs/JSON practice.py" />
+        <option value="$PROJECT_DIR$/Random Programs/data.txt" />
         <option value="$PROJECT_DIR$/Random Programs/Address Book.py" />
       </list>
     </option>
@@ -519,7 +518,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="9" y="22" width="1260" height="696" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -534,7 +533,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854864" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -557,6 +556,41 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="4590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="17" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="4590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="24" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0" vertical-offset="572" max-vertical-offset="4624">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="5015">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="49" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="3910">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="39" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414">
@@ -644,14 +678,9 @@
         <state line="9" column="16" selection-start="79" selection-end="227" vertical-scroll-proportion="0.3923077" vertical-offset="0" max-vertical-offset="408" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Random Programs/data.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Random Programs/Address Book.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="49" selection-start="152" selection-end="152" vertical-scroll-proportion="0.18037136" vertical-offset="0" max-vertical-offset="3910">
+        <state line="152" column="32" selection-start="6184" selection-end="6217" vertical-scroll-proportion="0.42705572" vertical-offset="2423" max-vertical-offset="4641">
           <folding />
         </state>
       </provider>
