@@ -2,8 +2,9 @@
 
 from random import randint
 
-age = randint(0, 120)
 name = "Bill"
+max_age = 120
+age = randint(0, max_age)
 
 def game():
     guess = str(input("Guess how old " + name + " is: "))
@@ -12,7 +13,7 @@ def game():
         guess = str(input("Guess how old " + name + " is: "))
     guess = int(guess)
     if guess>120:
-        print(name + " is younger than 120 years old.")
+        print(name + " is younger than " + max_age + " years old.")
         game()
     if guess>age:
         print(name + " isn't that old!")
@@ -25,7 +26,6 @@ def game():
         playagain()
 
 def playagain():
-    global age
     print()
     pa = str(input("Would you like to play again? "))
     while pa != "yes" and pa != "y" and pa != "no" and pa != "n":

@@ -12,10 +12,10 @@ while True:
                 x = x + 1
             elif len(prime)<=x+1:
                 prime.append(num)
-                num = num + 1
+                num += 1
                 x = 0
         elif num%prime[x] == 0:
-            num = num + 1
+            num += 1
             x = 0
 
     print (prime)

@@ -53,11 +53,18 @@ def helper(filename):
     text = text.split()
     word_count = {}
     for word in range(len(text)):
+        if len(text[word]) > 1:
+            while not text[word][-1].isalnum():
+                text[word] = text[word][:-1]
+        if len(text[word]) > 2 and text[word][-2:] == "'s":
+            text[word] = text[word][:-2]
+            
         try:
             word_count[text[word]] += 1
         except KeyError:
             if str(text[word][0]).isalnum():
                 word_count[text[word]] = 1
+    word_count["Total:"] = len(text)
     return word_count
 
 def print_words(filename):
@@ -65,15 +72,17 @@ def print_words(filename):
     keys = word_count.keys()
     keys = list(keys)
     keys.sort()
+    print("Total: " + str(word_count["Total:"]))
     for key in range(len(keys)):
-        print(keys[key] + " " + str(word_count[keys[key]]))
+        if not keys[key] == "Total:":
+            print(keys[key] + " " + str(word_count[keys[key]]))
 
 def print_top(filename):
     word_count = helper(filename)
     keys = word_count.keys()
     keys = list(keys)
     keys.sort()
-    for x in range(20):
+    for x in range(21):
         highestval = 0
         highestkey = ""
         for key in range(len(keys)):
@@ -86,8 +95,6 @@ def print_top(filename):
         else:
             break
     
-###
-
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
